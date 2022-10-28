@@ -30,18 +30,23 @@ namespace Timers
 
         private void UpdateValueTimer(object sender, EventArgs e)
         {
-            var value = numericUpDown1.Value;
-            value--;
-            numericUpDown1.Value = value;
+            if(numericUpDown1.Value - 1 >= numericUpDown1.Minimum)
+            {
+                var value = numericUpDown1.Value--;
+                //value--;
+                //numericUpDown1.Value = value;
+            }
+            
         }
 
         private void ShouTimer(object sender, EventArgs e)
         {
             timer.Stop();
-            stopUpdateTimer();
+            
             button2.Enabled = false;
             button1.Enabled = true;
             MessageBox.Show("Таймер закончил работать", "Таймер");
+            stopUpdateTimer();
         }
 
         private void Start_Click(object sender, EventArgs e)
@@ -70,16 +75,17 @@ namespace Timers
         private void Stop_Click(object sender, EventArgs e)
         {
             timer?.Stop();
-            stopUpdateTimer();
+            
             button2.Enabled = false;
             button1.Enabled = true;
-            MessageBox.Show("Таймер не может работать", "Таймер");
+            MessageBox.Show("Таймер остановил работу", "Таймер");
+            stopUpdateTimer();
         }
         private void stopUpdateTimer()
         {
             timerUpdate.Enabled = false;
             timerUpdate.Stop();
-            numericUpDown1.Value = 0;
+            //numericUpDown1.Value = 0;
         }
 
     }
